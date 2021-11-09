@@ -148,9 +148,9 @@ public class ObjectAnalyzer {
         pl.add(o);
         pl.add(y);
 
-        //System.out.println(ObjectAnalyzer.toString(arr1));
-        //System.out.println(ObjectAnalyzer.toString(arr2));
-        System.out.println(new ObjectAnalyzer().toString(pl));
+        //System.out.println(new ObjectAnalyzer().toString(arr1));
+        //System.out.println(new ObjectAnalyzer().toString(arr2));
+        //System.out.println(new ObjectAnalyzer().toString(pl));
         //System.out.println(Arrays.toString(arr));
 
 
@@ -163,6 +163,26 @@ public class ObjectAnalyzer {
 //        }
 //        //while (!(Object.class == clazz));
 //        while (null != clazz);
+
+
+        /**
+         * 以下语句执行会报错，数组会记住每个元素的类型。创建了Object[]，虽然存储的是Employee，但是却不能被转回Employee
+         * 而反过来Employee-->Object 确是可以的。
+         */
+        Object[] obj = {o, y};
+        System.out.println(new ObjectAnalyzer().toString(obj));
+        //Employee[] emp = (Employee[])obj;//编译没有问题，但是运行java.lang.ClassCastException
+        //Employee[] emp2 = obj; //编译直接报错
+        //System.out.println(new ObjectAnalyzer().toString(emp));
+
+        /**
+         * Object[]可直接托管Employee[]，并且会记住其实际的类型
+         */
+        Employee[] emp1 = {o, y};
+        System.out.println(new ObjectAnalyzer().toString(emp1));
+        Object[] obj1 = emp1;
+        System.out.println(new ObjectAnalyzer().toString(obj1));
+
 
     }
 
