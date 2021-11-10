@@ -1,4 +1,4 @@
-package com.homer.lambda;
+package com.homer.interfaze.lambda;
 
 import java.util.ArrayList;
 import java.util.List;

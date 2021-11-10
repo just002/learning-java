@@ -1,4 +1,4 @@
-package com.homer.innerClass;
+package com.homer.interfaze.innerClass;
 
 public class Sequence {
     private Object[] items;
