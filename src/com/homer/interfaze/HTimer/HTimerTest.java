@@ -11,12 +11,7 @@ public class HTimerTest {
         HTimer timer = new HTimer(500, listener);
         timer.start(3);
 
-        //lambda
-        HTimer timerLambda = new HTimer(500, (int x) -> {System.out.println("lambda实现：" + x + "-->" + LocalDateTime.now());});
-        timerLambda.start(3);
-
-
-        //匿名内部类
+        //匿名内部类，不再需要单独的HTimerPrinter这个类
         HTimer timerInner = new HTimer(500, new HomerListener() {
             @Override
             public void toDo(int x) {
@@ -24,6 +19,11 @@ public class HTimerTest {
             }
         });
         timerInner.start(3);
+
+        //lambda，进一步简化，只要关注逻辑实现
+        HTimer timerLambda = new HTimer(500, (int x) -> {System.out.println("lambda实现：" + x + "-->" + LocalDateTime.now());});
+        timerLambda.start(3);
+
 
 //        try {
 //            Thread.sleep(1000 * 3);
