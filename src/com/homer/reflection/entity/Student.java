@@ -1,4 +1,4 @@
-package com.homer.reflection;
+package com.homer.reflection.entity;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,9 +9,8 @@ public class Student {
     private int sex;
 
     public void readbook(Book book){
-        System.out.println(this.name + "读了" + book.getName());
-        System.out.println("出版于：" + book.getPublishDate());
-        System.out.println("它的作者是" + book.getAuthor());
+        System.out.println(this.name + "拿起《" + book.getName() + "》翻了翻，又扔到了一边……");
+        System.out.println("《" +book.getName() + "》出版于" + book.getPublishDate() + "，作者是" + book.getAuthor() + "。");
     }
 
     public Student() {};
@@ -23,7 +22,7 @@ public class Student {
     }
 
     public static void main(String[] args) {
-        Object a = new Student("王宏",30,1);
+        Object a = new Student("Homer",30,1);
         Book b = new Book("Think in Java", LocalDate.of(1996,10,16),"张三丰");
 
         //虽然将a声明为Object，但系统还是认可他是一个student。

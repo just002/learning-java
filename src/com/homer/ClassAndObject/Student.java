@@ -20,7 +20,7 @@ public class Student extends Person {
 
     public static void main(String[] args) {
         //这里比较奇怪，为何把3赋值给grade就可以，但是作为方法的参数就必须进行强制类型转换呢？
-        Student homer = new Student("王大宏","埃塞俄比亚加里敦大学/",(byte)3,"计算机科学与技术");
+        Student homer = new Student("Homer","埃塞俄比亚加里敦大学/",(byte)3,"计算机科学与技术");
         System.out.println(homer.getDescription());
 
         byte x = 1;

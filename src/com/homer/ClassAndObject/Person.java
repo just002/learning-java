@@ -34,7 +34,7 @@ public abstract class Person {
 
     public static void main(String[] args) {
 
-        Student homer = new Student("王大宏","埃塞俄比亚加里敦大学/",(byte)3,"计算机科学与技术");
+        Student homer = new Student("Homer","埃塞俄比亚加里敦大学/",(byte)3,"计算机科学与技术");
         Employee panda = new Employee("熊猫",new Date(),120000.00, "资深软件工程师");
         Manager nb = new Manager("刘备",new Date(),110000.00, 200000, "副主任");
 

@@ -15,6 +15,7 @@ import com.homer.ClassAndObject.CommInfo;
 import com.homer.ClassAndObject.Employee;
 import com.homer.ClassAndObject.Manager;
 import com.homer.ClassAndObject.Person;
+import com.homer.reflection.entity.*;
 
 public class ObjectAnalyzer {
 

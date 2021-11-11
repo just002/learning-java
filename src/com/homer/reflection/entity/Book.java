@@ -1,7 +1,6 @@
-package com.homer.reflection;
+package com.homer.reflection.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Book {
     private String name;
@@ -9,7 +8,7 @@ public class Book {
     private String author;
 
     public Book(){
-        System.out.println("Book()");
+        //System.out.println("Book()");
     }
 
     public Book(String name, LocalDate publishDate, String author) {
