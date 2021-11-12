@@ -2,20 +2,40 @@ package com.homer.ClassAndObject;
 
 public class Student extends Person {
 
+    private int stuNo;//学号
     private String college;
     private byte grade;
     private String major;
 
-    Student(String name, String college, byte grade, String major){
+    public Student(String name, String college, byte grade, String major){
         super(name);
         this.college = college;
         this.grade = grade;
         this.major = major;
     }
 
+    public Student(String name, String college, byte grade, String major, int stuNo){
+        this(name, college, grade, major);
+        this.stuNo = stuNo;
+    }
+
     @Override
     public String getDescription() {
         return "姓名：" + this.getName() + "\n大学与专业: " + this.college + this.major + "专业" + this.grade + "年级";
+    }
+
+    public int getStuNo() {
+        return stuNo;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "stuNo=" + stuNo +
+                ", college='" + college + '\'' +
+                ", grade=" + grade +
+                ", major='" + major + '\'' +
+                '}';
     }
 
     public static void main(String[] args) {

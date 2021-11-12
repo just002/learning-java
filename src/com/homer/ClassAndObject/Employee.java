@@ -8,7 +8,7 @@ import java.util.Random;
  * 这是类的注释
  * @author Homer
  */
-public   class Employee extends Person {//之前将Employee放在EmployeeTest里面，变成内部类了。。
+public class Employee extends Person implements Comparable<Employee> {//之前将Employee放在EmployeeTest里面，变成内部类了。。
 
     /**
      * 属于类的变量，这是其中一种用法
@@ -115,4 +115,20 @@ public   class Employee extends Person {//之前将Employee放在EmployeeTest里
     public int hashCode() {
         return Objects.hash(getName(), getSalary());
     }
+
+    /**
+     * 实现接口，按照收入进行排序
+     * @param other
+     * @return
+     */
+    @Override
+    public int compareTo(Employee other) {
+        return Double.compare(this.salary, other.salary);
+    }
+
+//    如果没有使用参数化类型,必须强制转型
+//    @Override
+//    public int compareTo(Object other) {
+//        return Double.compare(this.salary, ((Employee)other).salary);
+//    }
 }
