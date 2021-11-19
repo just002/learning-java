@@ -2,6 +2,7 @@ package com.homer.interfaze;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.function.Supplier;
 
 
 public class TimerTest {
@@ -27,7 +28,9 @@ public class TimerTest {
 
         System.exit(0);
 
+        Runnable R = ()->{};
 
+        Supplier sup = () -> {return 0;};
 
     }
 }

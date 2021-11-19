@@ -4,7 +4,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import com.homer.reflection.entity.*;
 
-public class Read {
+public class ReadTest {
 
     public static  void main(String[] args){
 
@@ -12,7 +12,6 @@ public class Read {
         Student s  = new Student("Homer",30,1);
 
         //s.readbook(b);
-
 
         Class bookClass = null;
         Class<Student> studentClass = null;
