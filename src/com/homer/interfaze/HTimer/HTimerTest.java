@@ -64,4 +64,14 @@ public class HTimerTest {
         HTimer timer = new HTimer(500, listener);
         timer.start(3);
     }
+
+
+    public static void printIntTest(int i) {
+        /**
+         * 如果使用i--将直接提示编译错误，lambda或者匿名内部类要求变量只能被赋值一次，必须是final的
+         */
+        HomerListener listener = x -> System.out.println(i + x + "-->" + LocalDateTime.now());
+        HTimer timer = new HTimer(500, listener);
+        timer.start(3);
+    }
 }

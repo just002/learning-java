@@ -20,6 +20,7 @@ public class ArraySortTest {
 
         Arrays.stream(emps).forEach((emp)-> System.out.println(emp));
 
+
         Student homer = new Student("Homer","埃塞俄比亚加里敦大学/",(byte)3,"计算机科学与技术", 10003);
         Student hostman = new Student("hostman","野鸡大学/",(byte)3,"Java",1);
         Student linus = new Student("linus","野鸭大学/",(byte)3,"Linux",25);
@@ -38,6 +39,9 @@ public class ArraySortTest {
         //如果排序方法反过来
         Arrays.sort(stus, (a, b) ->  b.getStuNo() - a.getStuNo());
         Arrays.stream(stus).forEach((stu)-> System.out.println(stu));
+
+
+
 
     }
 }
