@@ -9,7 +9,9 @@ public class ClassPrinter {
         //System.out.print("请输入要查看的类（含包路径）");
         //String className = scanner.next();
 
-        String className = "java.lang.Class";
+
+        //一个带有内部类的类
+        String className = "com.homer.interfaze.innerClass.TalkingClock";
 
         try {
             Class clazz = Class.forName(className);

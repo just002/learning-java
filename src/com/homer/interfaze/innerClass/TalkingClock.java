@@ -37,6 +37,8 @@ public class TalkingClock {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("执行时间:" + LocalDateTime.now());
+            System.out.println("间隔时间: " + interval);
+            //引用的外部类的变量，可以写为：TalkingClock.this.beep
             if(beep) Toolkit.getDefaultToolkit().beep();
         }
     }
