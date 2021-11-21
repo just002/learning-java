@@ -31,8 +31,6 @@ public class HTimerTest {
         HTimer timerLambda = new HTimer(500, (int x) -> {System.out.println("lambda实现：" + x + "-->" + LocalDateTime.now());});
         timerLambda.start(3);
 
-        printString("将方法的参数传给lambda");
-
         listener.defaultMethod();
 
 
@@ -52,26 +50,5 @@ public class HTimerTest {
         //进入timer之后，程序根本到不了这里。
         //JOptionPane.showMessageDialog(null, "点击确定后退出。");
         //System.exit(0);
-
-
-    }
-
-    public static void printString(String str) {
-        /**
-         * !!!将lamdba赋值给一个函数式接口!!!
-         */
-        HomerListener listener = x -> System.out.println(str + x + "-->" + LocalDateTime.now());
-        HTimer timer = new HTimer(500, listener);
-        timer.start(3);
-    }
-
-
-    public static void printIntTest(int i) {
-        /**
-         * 如果使用i--将直接提示编译错误，lambda或者匿名内部类要求变量只能被赋值一次，必须是final的
-         */
-        HomerListener listener = x -> System.out.println(i + x + "-->" + LocalDateTime.now());
-        HTimer timer = new HTimer(500, listener);
-        timer.start(3);
     }
 }
