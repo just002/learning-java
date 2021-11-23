@@ -6,9 +6,11 @@ import java.util.Arrays;
 
 public class ProxyTraceTest {
 
+    private static final Integer biggestNum = 100000;
+
     public static void main(String[] args) {
 
-        Object[] numbers = new Object[1000];
+        Object[] numbers = new Object[biggestNum];
         for (int i = 0; i < numbers.length; i++) {
 
             Integer number = i + 1;
@@ -24,9 +26,16 @@ public class ProxyTraceTest {
             numbers[i] = proxy;
         }
 
-        System.out.println(Arrays.toString(numbers));
+        //System.out.println(Arrays.toString(numbers));
 
-        Integer target = (int)(Math.random() * 1000);
+        Integer target = (int)(Math.random() * biggestNum);
         Arrays.binarySearch(numbers, target);
+
+        /**
+         * 这种二分查找的方式非常优秀，即使数据范围增长数倍，其查询次数却只是增长几次而已.
+         * 比如10万个对象和100万个一般只相差几次而已，对数据量极其不敏感。
+         */
+        System.out.println("***调用次数-->" + TraceHandler.getCallCount());
+
     }
 }
