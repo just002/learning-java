@@ -13,12 +13,17 @@ public class StackTraceTest {
 
         System.out.println("factorial(" + x + ")");
 
+        //堆栈轨迹是从当前线程中取出的
         Throwable t = new Throwable();
         StackTraceElement[] ste = t.getStackTrace();
         for( StackTraceElement e: ste) {
             System.out.println(e);
         }
 
+        /**
+         * 递归和循环是一个道理，必须有一个截止的条件。比如本例就是从一个整数递减，直到x <= 1直接返回1。
+         * 一开始，我写成x + 1递增，就永远不会满足x<=1而导致报了StackOverflowError
+         */
         int result;
         if(x <= 1)
             result = 1;
