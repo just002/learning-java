@@ -33,7 +33,7 @@ public class Range {
 //            print(i + " ");
 //        }
 
-        for (int i : Range.range(5,4)) {
+        for (int i : Range.range(3,100)) {
             print(i + " ");
         }
     }
