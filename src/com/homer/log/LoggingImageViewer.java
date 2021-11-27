@@ -15,11 +15,11 @@ public class LoggingImageViewer {
         if(System.getProperty("java.util.logging.config.class") == null && System.getProperty("java.util.logging.config.file") == null) {
 
             try {
-                //相当于设置了整体的日志级别
+                //Logger.getLogger("") 是所有日志记录器的父类,相当于是设置了一个全局的级别
                 Logger.getLogger("").setLevel(Level.ALL);
                 final int LOG_ROTATION_COUNT = 10;
                 //%h-->系统属性user.home的值  %t-->系统临时目录  %u-->用于解决冲突的唯一编码的值
-                Handler handler = new FileHandler("%h/myapp.log",0,LOG_ROTATION_COUNT);
+                Handler handler = new FileHandler("%h/myapp.log",0, LOG_ROTATION_COUNT);
                 Logger.getLogger("").addHandler(handler);
 
             } catch (IOException e) {
@@ -29,14 +29,16 @@ public class LoggingImageViewer {
 
         //构建窗口
         EventQueue.invokeLater(() -> {
+            //打开记录窗口
             Handler windowHandler = new WindowHandler();
             windowHandler.setLevel(Level.ALL);
             Logger.getLogger("com.homer.log").addHandler(windowHandler);
 
+            //打开图片查看器
             JFrame frame = new ImageViewerFrame();
             frame.setTitle("LoggingImageViewer");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            Logger.getLogger("com.homer.log").fine("Showing frame");
+            Logger.getLogger("com.homer.log").finest("Showing frame");
             frame.setVisible(true);
         });
     }

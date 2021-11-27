@@ -19,7 +19,10 @@ public class ImageViewerFrame extends JFrame {
     private JLabel label;
 
     public ImageViewerFrame() {
+        //logger.entering()、logger.exiting()仅仅只是打印进入和推出函数的日志而已，并无其他含义
         logger.entering("ImageViewerFrame","<init>");
+        //logger.throwing()是打印stack trace信息
+        logger.throwing("ImageViewerFrame", "<init>", new Exception("这是一条logger.throwing()测试日志信息"));
 
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
 
@@ -44,7 +47,6 @@ public class ImageViewerFrame extends JFrame {
         add(label);
 
         logger.exiting("ImageViewerFrame","<init>");
-
     }
 
     private class FileOpenListener implements ActionListener {
@@ -53,8 +55,9 @@ public class ImageViewerFrame extends JFrame {
 
             logger.entering("ImageViewerFrame.FileOpenListener", "actionPerformed", e);
 
+            //文件选择器
             JFileChooser fileChooser = new JFileChooser();
-            //设置默认路径？
+            //设置默认路径
             fileChooser.setCurrentDirectory(new File("."));
 
             //FileFilter是一个抽象类，而且有两个方法，因此不能用lambda表达式
@@ -78,6 +81,7 @@ public class ImageViewerFrame extends JFrame {
                 label.setIcon(new ImageIcon(imagePath));
             }
             else {
+                //与这条语句完全一样 logger.log(Level.FINE, "File open dialog is cancelled.");
                 logger.fine("File open dialog is cancelled.");
             }
 
