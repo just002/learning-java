@@ -19,7 +19,7 @@ public class ImageViewerFrame extends JFrame {
     private JLabel label;
 
     public ImageViewerFrame() {
-        //logger.entering()、logger.exiting()仅仅只是打印进入和推出函数的日志而已，并无其他含义
+        //logger.entering()、logger.exiting()仅仅只是打印进入和推出函数的日志而已，并无其他含义。实际上调用的都是logp()。
         logger.entering("ImageViewerFrame","<init>");
         //logger.throwing()是打印stack trace信息
         logger.throwing("ImageViewerFrame", "<init>", new Exception("这是一条logger.throwing()测试日志信息"));
