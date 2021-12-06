@@ -1,5 +1,6 @@
 package com.homer.reflection;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.Scanner;
 import java.lang.reflect.*;
 
@@ -11,7 +12,7 @@ public class ClassPrinter {
 
 
         //一个带有内部类的类
-        String className = "com.homer.interfaze.innerClass.TalkingClock";
+        String className = "com.homer.generic.DataInterval";
 
         try {
             Class clazz = Class.forName(className);
@@ -86,7 +87,11 @@ public class ClassPrinter {
                 if(i == paras.length - 1)
                     System.out.print(paras[i]);
             }
-            System.out.print(");\n");
+            System.out.print(")");
+            if(m.isBridge())
+                System.out.print("*");
+            System.out.println(";");
+
         }
     }
 

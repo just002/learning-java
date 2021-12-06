@@ -38,7 +38,7 @@ public class ArraySortTest {
 
         //如果排序方法反过来
         Arrays.sort(stus, (a, b) ->  b.getStuNo() - a.getStuNo());
-        Arrays.stream(stus).forEach((stu)-> System.out.println(stu));
+        Arrays.stream(stus).forEach(System.out::println);
 
 
 
