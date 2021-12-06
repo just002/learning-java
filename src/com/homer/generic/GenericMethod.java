@@ -1,5 +1,14 @@
 package com.homer.generic;
 
+import com.homer.ClassAndObject.Employee;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.List;
+
 public class GenericMethod {
 
     /**
@@ -23,5 +32,24 @@ public class GenericMethod {
         //<Integer>通常是被省略的，编译器可以直接推断出。
         double middle = GenericMethod.<Integer>getMiddle(1,2,3,4,5,6,7,8,9,10);
         System.out.println(middle);
+
+
+        Dictionary<Integer, Component> dir = new Hashtable<>();
+        dir.put(0,new JLabel("1"));
+
+        JSlider js = new JSlider();
+        js.setLabelTable(dir);
+
+        @SuppressWarnings("unchecked")
+        Dictionary<Integer, Component> dir1 = js.getLabelTable();
+
+
+        //不能创建参数化类型的数组，以下语句是错误的
+        //Pair<Employee>[] a = new Pair<Employee>[1];
+        //Pair<Employee>[] b = (Pair<Employee>)new Pair<?>[1];
+
+        //替代方式是用List
+        List<Pair<Employee>> l = new ArrayList<>();
+
     }
 }
