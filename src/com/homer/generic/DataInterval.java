@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class DataInterval extends Pair<LocalDate> {
 
     @Override
-    public void setSecond(LocalDate second) throws Exception {
+    public void setSecond(LocalDate second)  {
         if(this.getFirst() != null && second.compareTo(this.getFirst()) <= 0) {
             super.setSecond(this.getFirst());
             super.setFirst(second);
@@ -14,7 +14,7 @@ public class DataInterval extends Pair<LocalDate> {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         LocalDate ld1 = LocalDate.now();
         LocalDate ld2 = LocalDate.now().plusDays(1);
 

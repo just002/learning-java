@@ -1,8 +1,6 @@
 package com.homer.generic;
 
-import com.homer.ClassAndObject.Employee;
-
-import java.util.Arrays;
+import com.homer.ClassAndObject.*;
 import java.util.Date;
 
 public class PairTest {
@@ -57,7 +55,7 @@ public class PairTest {
             if(x.compareTo(min) < 0) min = x;
         }
 
-        return new Pair<>(min, max);
+        return new Pair<>(max, min);
     }
 
     public static void main(String[] args) throws Exception {
@@ -84,6 +82,5 @@ public class PairTest {
         Pair<Employee> pair2 = getMaxMin(employees);
         System.out.println("最小：" + pair2.getFirst());
         System.out.println("最大：" + pair2.getSecond());
-
     }
 }

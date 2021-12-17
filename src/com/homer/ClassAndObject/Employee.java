@@ -40,6 +40,7 @@ public class Employee extends Person implements Comparable<Employee> {//之前�
         //System.out.println("初始化块name-->" + name);
     }
 
+    public Employee() {};
     public Employee(String name, Date hireDay, double salary) {
         super(name);
         this.hireDay = hireDay;
@@ -123,7 +124,7 @@ public class Employee extends Person implements Comparable<Employee> {//之前�
      */
     @Override
     public int compareTo(Employee other) {
-        return Double.compare(this.salary, other.salary);
+        return Double.compare(this.getSalary(), other.getSalary());
     }
 
 //    如果没有使用参数化类型,必须强制转型
