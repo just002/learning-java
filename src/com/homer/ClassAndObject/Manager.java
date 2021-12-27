@@ -54,4 +54,10 @@ public class Manager extends Employee {
         return super.hashCode() + 17 * new Double(this.bonus).hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "bonus=" + bonus +
+                "} " + super.toString();
+    }
 }

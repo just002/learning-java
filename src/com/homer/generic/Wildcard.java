@@ -21,6 +21,13 @@ public class Wildcard {
             System.out.println("Second-->" + pair.getSecond());
     }
 
+    public static void printPairEvery(Pair<?> pair) {
+        if(pair.getFirst() != null)
+            System.out.println("First-->" + pair.getFirst());
+        if(pair.getSecond() != null)
+            System.out.println("Second-->" + pair.getSecond());
+    }
+
     public static void main(String[] args) {
 
         Employee x = new Employee("zhangfei", new Date(), 100);

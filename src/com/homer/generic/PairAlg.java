@@ -6,6 +6,11 @@ public class PairAlg {
         return pair.getFirst() == null || pair.getSecond() == null;
     }
 
+    /**
+     * 为什么要用这个函数包装一层？
+     * 原因是swapHelper比如传入指定类型的Pair，但是swap是直接传入
+     * @param pair
+     */
     public static void swap(Pair<?> pair) {
         swapHelper(pair);
     }
@@ -23,8 +28,10 @@ public class PairAlg {
     }
 
     public static void main(String[] args) {
-        Pair<String> p = new Pair<>("a","b");
+        Pair<String> p = new Pair<>("a",null);
         swap(p);
         System.out.println(p);
+
+        System.out.println(hasNull(p));
     }
 }
