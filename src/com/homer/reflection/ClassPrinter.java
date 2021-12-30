@@ -1,18 +1,17 @@
 package com.homer.reflection;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.Scanner;
 import java.lang.reflect.*;
 
 public class ClassPrinter {
     public static void main(String[] args) {
-        //Scanner scanner = new Scanner(System.in);
-        //System.out.print("请输入要查看的类（含包路径）");
-        //String className = scanner.next();
 
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("请输入要查看的类（含包路径）：");
+//        String className = scanner.next();
 
         //一个带有内部类的类
-        String className = "com.homer.generic.DataInterval";
+        String className = "com.homer.generic.Pair";
 
         try {
             Class clazz = Class.forName(className);
@@ -31,15 +30,22 @@ public class ClassPrinter {
                 System.out.println("extends " + superClazz.getName());
 
             System.out.println("{");
+
             //打印构造方法
+            System.out.println("\t//构造函数");
             printConstructors(clazz);
             System.out.println();
-            //打印方法
-            printMethods(clazz);
-            System.out.println();
+
             //打印域
+            System.out.println("\t//域");
             printFields(clazz);
             System.out.println();
+
+            //打印方法
+            System.out.println("\t//类方法");
+            printMethods(clazz);
+            System.out.println();
+
 
             System.out.println("}");
 

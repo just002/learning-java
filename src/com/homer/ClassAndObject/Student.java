@@ -7,6 +7,8 @@ public class Student extends Person {
     private byte grade;
     private String major;
 
+    public Student(){}
+
     public Student(String name, String college, byte grade, String major){
         super(name);
         this.college = college;
