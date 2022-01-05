@@ -9,21 +9,44 @@ public class LinkedListTest {
 
     public static void main(String[] args) {
 
-        LinkedList<String> marvel = new LinkedList<>();
-        marvel.add("Iron Man");
-        marvel.add("spider Man");
-        marvel.add("Captain America");
+        LinkedList<String> MarvelHeros = new LinkedList<>();
+        MarvelHeros.add("Iron Man");
+        MarvelHeros.add("spider Man");
+        MarvelHeros.add("Captain America");
 
-        LinkedList<String> DC = new LinkedList<>();
-        DC.add("Super Man");
-        DC.add("The Flash");
-        DC.add("Wonder Woman");
+        LinkedList<String> DCHeros = new LinkedList<>();
+        DCHeros.add("Super Man");
+        DCHeros.add("The Flash");
+        DCHeros.add("Wonder Woman");
 
-        ListIterator marvelIter = marvel.listIterator();
-        Iterator DCIter = DC.iterator();
+        //ListIterator具有add方法
+        ListIterator marvelIter = MarvelHeros.listIterator();
+        Iterator DCIter = DCHeros.iterator();
 
+        while(marvelIter.hasNext()) {
+            if (DCIter.hasNext()) {
+                marvelIter.next();
+            }
+            marvelIter.add(DCIter.next());
+        }
 
+        System.out.println(MarvelHeros);
 
+        marvelIter = MarvelHeros.listIterator();
+
+        while (marvelIter.hasNext()) {
+            marvelIter.next();//直接跳过一个
+            //next与remove配合，其实只是删掉下一个，如果不跳过就全部删除掉了。
+            if(marvelIter.hasNext()) {
+                marvelIter.next();
+                marvelIter.remove();
+            }
+        }
+
+        System.out.println(MarvelHeros);
+
+        DCHeros.removeAll(MarvelHeros);
+        System.out.println(DCHeros);
     }
 
 }
