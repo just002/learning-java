@@ -47,6 +47,10 @@ public class LinkedListTest {
 
         DCHeros.removeAll(MarvelHeros);
         System.out.println(DCHeros);
+
+        String homer = "b";
+        System.out.println(homer.hashCode());
+
     }
 
 }
