@@ -9,11 +9,14 @@ import java.util.Scanner;
 public class SetTest {
 
     public static void main(String[] args)  {
+
         HashSet words = new HashSet();
         long time = 0;
 
         //jdk1.7之后，该语法用于关于资源连接，防止连接泄露
-        try(Scanner scanner = new Scanner(new File("C:\\Users\\Homer\\Desktop\\11-0.txt"))) {
+        //String filePath = SetTest.class.getResource("The Old Man and the Sea.txt").getPath().replaceAll("//","\\");
+        //System.out.println(filePath);
+        try(Scanner scanner = new Scanner(new File("D:\\project\\learning-java\\out\\production\\learning-java\\com\\homer\\connection\\The Old Man and the Sea.txt"))) {
             while (scanner.hasNext()) {
                 long start = System.currentTimeMillis();
                 words.add(scanner.next());
