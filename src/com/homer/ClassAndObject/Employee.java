@@ -54,6 +54,14 @@ public class Employee extends Person implements Comparable<Employee> {//之前�
         this.post = post;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String getDescription() {
         return "姓名：" + this.getName() + "\n岗位: " + this.post + "/收入" + this.getSalary();
