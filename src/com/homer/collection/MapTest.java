@@ -1,4 +1,4 @@
-package com.homer.connection;
+package com.homer.collection;
 
 import com.homer.ClassAndObject.Employee;
 import com.homer.ClassAndObject.Manager;

@@ -1,4 +1,4 @@
-package com.homer.connection;
+package com.homer.collection;
 
 import java.time.LocalDate;
 import java.util.ArrayDeque;

@@ -1,4 +1,4 @@
-package com.homer.connection.treeSet;
+package com.homer.collection.treeSet;
 
 import java.util.Objects;
 

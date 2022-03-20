@@ -1,9 +1,12 @@
 package com.homer.basic.enumtest;
 
+import java.util.EnumSet;
+
 public enum NbSize {
 
-    /** 一旦有构造函数，就必须按构造函数进行初始化。
-     * 由此可以，这么列出来的几个成员其实是NBSize的几个固定实例
+    /**
+     * 一旦有构造函数，就必须按构造函数进行初始化。
+     * 枚举类的成员其实是它的几个固定实例
      */
     SMALL("S","小号"),MEDIUM("M","中号"),LARGE("L","大号"),EXTRA_LARGE("XL","加大号"),EXTRA_EXTRA_LARGE("XXL","超大号");
 
@@ -49,5 +52,11 @@ public enum NbSize {
         for(NbSize i : values) {
             System.out.println(i.ordinal() + "-->" + i);
         }
+
+        //EnumSet<NbSize> size = EnumSet.allOf(NbSize.class);
+        EnumSet<NbSize> size = EnumSet.range(NbSize.SMALL,NbSize.LARGE);
+        size.forEach((a) -> {
+            System.out.println(a.flag + "---->" + a.chn);
+        });
     }
 }

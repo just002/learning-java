@@ -109,9 +109,8 @@ public class Employee extends Person implements Comparable<Employee> {//之前�
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        com.homer.ClassAndObject.Employee employee = (com.homer.ClassAndObject.Employee) o;
-        return Objects.equals(this.getName(), employee.getName())
-                && this.getSalary() == employee.getSalary();
+        Employee employee = (Employee) o;
+        return Objects.equals(this.getName(), employee.getName()) && this.getSalary() == employee.getSalary();
     }
 
 
