@@ -1,28 +1,36 @@
 package com.homer.concurrent;
 
 import java.util.Arrays;
-import java.util.Random;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Bank {
 
     private static double[] Accounts;
-    private Lock backLock = new ReentrantLock();
+    private Lock bankLock = new ReentrantLock();
+
+    private Condition bankCondition;
 
     public Bank(int size, double money) {
         Accounts = new double[size];
         Arrays.fill(Accounts, money);
+        bankCondition = bankLock.newCondition();
     }
 
     public double total() {
-        //也许不会有Accounts为空的情况？
-        if(Accounts == null || Accounts.length == 0)
-            return 0;
-        double sum = 0;
-        for(double x : Accounts)
-            sum = sum + x;
-        return sum;
+        bankLock.lock();
+        try {
+            if (Accounts == null || Accounts.length == 0)
+                return 0;
+            double sum = 0;
+            for (double x : Accounts)
+                sum = sum + x;
+            return sum;
+        }
+        finally {
+            bankLock.unlock();
+        }
     }
 
     public void transfer(int from, int to, double money) {
@@ -34,58 +42,37 @@ public class Bank {
          * 但B线程没有被中断，完成了所步骤将计算后的变量存入了内存；之后A线程被唤醒，将起对应的计算后的变量存入内存。此时，错误就出现了，B线程的计算结果被忽略！
          *
          */
-        backLock.lock();
+        bankLock.lock();
         try {
+
             System.out.print(Thread.currentThread());
+
+            while (Accounts[from] < money) {
+                System.out.println("Account[" + from + "]金额不足，线程等待");
+                bankCondition.await();
+            }
 
             if(from == to) {
                 System.out.println("转账失败，不能给自己转账");
                 return;
             }
 
-            if(Accounts[from] < money) {
-                System.out.println("转账失败，Accout[" + from + "]金额不足");
-                return;
-            }
-
             Accounts[from] = Accounts[from] - money;
             Accounts[to] = Accounts[to] + money;
-
             System.out.printf("Account[%d]向Account[%d]转账%10.2f\b",from,to,money);
             System.out.printf("总金额%10.2f \n", this.total());
-        }
-        finally {
-            backLock.unlock();
-        }
 
+            bankCondition.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            bankLock.unlock();
+        }
 
     }
 
-    public static void main(String[] args) {
-        int BANK_SIZE = 10;
-        int AMOUNT =1000;
-        Bank bank = new Bank(BANK_SIZE,AMOUNT);
-        //bank.transfer(1,2,100);
-
-        /**
-         * 建了与backsize数目一样的线程，同时允许
-         */
-        for(int i = 0; i < BANK_SIZE; i++) {
-            new Thread(() -> {
-                while (true) {
-                    try {
-                        Random random = new Random();
-                        int from = random.nextInt(BANK_SIZE);
-                        int to = random.nextInt(BANK_SIZE);
-                        int money = random.nextInt(AMOUNT);
-                        bank.transfer(from, to, money);
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
+    @Override
+    public String toString() {
+        return Arrays.toString(Accounts);
     }
-
 }
