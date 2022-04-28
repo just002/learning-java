@@ -40,7 +40,9 @@ public class BlockingQueueTest {
         BufferedReader br = new BufferedReader(is);
         String line;
         int row = 1;
+        int column;
         while ((line = br.readLine()) != null) {
+            column = line.indexOf(keyWord);
             if(line.contains(keyWord)) {
                 System.out.println( "####匹配到关键字[" + keyWord + "]，位于文件[" + file.getName() + "]第" + row + "行。");
                 continue;
@@ -49,45 +51,50 @@ public class BlockingQueueTest {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException, IOException {
-        //serach("人", new File("D:\\code\\learning-java\\src\\com\\homer\\concurrent\\test.txt"));
-
-        String dir = "D:\\code\\learning-java";
-        String keyWord = "Homer";
-        int threadNum = 2;
-
-        new Thread(() -> {
-            try {
-                loadDir(new File(dir));
-                //妙啊！这里放一个假人的目的是，为了让线程知道何时结束
-                blockingQueue.put(DUMMY);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
 
 
-        for (int i=0; i<threadNum; i++) {
-            new Thread(() -> {
-                try {
-                    boolean done = false;
-                    while (!done) {
-                        File file = blockingQueue.take();
-                        System.out.println(Thread.currentThread() + ": take: " + file.getPath() + "-->" + blockingQueue.size());
-                        if(file == DUMMY) {
-                            // 如果取到DUMMY说明队列已经没有数据进来了，循环结束。
-                            // 还要重新放入DUMMY的目的是为了然其他线程也知道结束了，否则只能结束本线程，其他线程永远得不到通知
-                            blockingQueue.put(DUMMY);
-                            done = true;
-                        } else
-                            search(keyWord, file);
-                    }
+    public static void main(String[] args) {
 
-                } catch (InterruptedException | IOException e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        }
+        String a = "abd 123 ddd   ddd 123 111";
+        System.out.println(a.indexOf("1234"));
+        System.out.println(a.indexOf("123",4 + "123".length()));
+//
+//        String dir = System.getProperty("user.dir");
+//        String keyWord = "Homer";
+//        int threadNum = 2;
+//
+//        new Thread(() -> {
+//            try {
+//                loadDir(new File(dir));
+//                //妙啊！这里放一个假人的目的是，为了让线程知道何时结束
+//                blockingQueue.put(DUMMY);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
+//
+//
+//        for (int i=0; i<threadNum; i++) {
+//            new Thread(() -> {
+//                try {
+//                    boolean done = false;
+//                    while (!done) {
+//                        File file = blockingQueue.take();
+//                        System.out.println(Thread.currentThread() + ": take: " + file.getPath() + "-->" + blockingQueue.size());
+//                        if(file == DUMMY) {
+//                            // 如果取到DUMMY说明队列已经没有数据进来了，循环结束。
+//                            // 还要重新放入DUMMY的目的是为了然其他线程也知道结束了，否则只能结束本线程，其他线程永远得不到通知
+//                            blockingQueue.put(DUMMY);
+//                            done = true;
+//                        } else
+//                            search(keyWord, file);
+//                    }
+//
+//                } catch (InterruptedException | IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }).start();
+//        }
 
     }
 }
