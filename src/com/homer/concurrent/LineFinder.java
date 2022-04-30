@@ -1,32 +1,35 @@
 package com.homer.concurrent;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LineFinder {
 
-    private String line;
-    private Map<String, Integer> positions = new HashMap<>();
+    private List<Integer> positions = new ArrayList<>();
 
-    LineFinder(String line) {
-        this.line = line;
+    private void getIndexFromLine(String keyWord, String line) {
+        int index = line.indexOf(keyWord);
+        if(index == -1) return;
+
+        //计算真实位置
+        if(positions.size() == 0)
+            positions.add(index);
+        else
+            positions.add(index + positions.get(positions.size() - 1) + keyWord.length());
+
+
+        String next = line.substring(index + keyWord.length());
+        if (next.length() > 0)
+            getIndexFromLine(keyWord, next);
+
     }
 
-    private void getIndexFromLine(String keyWord, int start) {
-        int index = line.indexOf(keyWord, 0);
-        if(index > 0) {
-            positions.put(keyWord, index);
-            getIndexFromLine(keyWord, index + keyWord.length());
-        }
+    public List<Integer> getPositions(String line, String keyWord) {
+        getIndexFromLine(keyWord, line);
+        return positions;
     }
 
     public static void main(String[] args) {
-
-        String a = "abd 123 ddd   ddd 123 111";
-        LineFinder finder = new LineFinder(a);
-        //System.out.println(finder.getIndexFromLine("123"););
-
-        System.out.println(a.indexOf("1234"));
-        System.out.println(a.indexOf("123", 4 + "123".length()));
+        System.out.println(new LineFinder().getPositions("ab ab dddddad   sssab","ab"));
     }
 }
