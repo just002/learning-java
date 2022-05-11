@@ -9,11 +9,9 @@ public class BlockingQueueTest {
     private static BlockingQueue<File> blockingQueue = new ArrayBlockingQueue(10);
     private static File DUMMY = new File("");
 
-    //遍历目录，并装载文件
+    // 遍历目录，并装载文件。采用recursive call（递归）方式层层遍历加载文件到堵塞队列
+    // 阻塞队列的机制，当装载内容达到上限，线程会进入阻塞状态
     private static void loadDir(File dir) throws InterruptedException {
-//        if (dir.getName().startsWith("."))
-//            return;
-
         File[] files = dir.listFiles();
         for (File file : files) {
             if(file.getName().startsWith(".")) {
@@ -27,9 +25,6 @@ public class BlockingQueueTest {
                 System.out.println(Thread.currentThread() + ": 进入目录：" + file.getPath());
                 loadDir(file);
             }
-
-
-
         }
     }
 
@@ -42,7 +37,9 @@ public class BlockingQueueTest {
         int row = 1;
         while ((line = br.readLine()) != null) {
             if(line.contains(keyWord)) {
-                System.out.println( "****关键字[" + keyWord + "]出现在文件[" + file.getName() + "]的" + row + "行" + new LineFinder().getPositions(line, keyWord) + "列");
+                System.out.println( "****关键字[" + keyWord + "]出现在文件[" + file.getPath() + "]的"
+                        + row + "行" + new LineFinder().getPositions(line, keyWord) + "列 \n"
+                        + line.replace(keyWord,"*"+keyWord+"*"));
             }
             row++;
         }
@@ -53,7 +50,7 @@ public class BlockingQueueTest {
     public static void main(String[] args) {
 
         String dir = System.getProperty("user.dir");
-        String keyWord = "王宏";
+        String keyWord = "Homer";
         int threadNum = 5;
 
         new Thread(() -> {
