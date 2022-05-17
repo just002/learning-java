@@ -1,4 +1,4 @@
-package com.homer.concurrent;
+package com.homer.concurrent.future;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,6 +20,7 @@ public class MatchCounter implements Callable<Integer> {
     }
 
     private boolean search(File file) {
+        System.out.printf("[%s] Search File [%s]\n", Thread.currentThread(), file.getName());
         boolean result = false;
         try {
             Scanner scanner = new Scanner(file);

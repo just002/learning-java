@@ -1,4 +1,4 @@
-package com.homer.concurrent;
+package com.homer.concurrent.blockqueue;
 
 import java.util.ArrayList;
 import java.util.List;

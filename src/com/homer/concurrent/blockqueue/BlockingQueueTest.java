@@ -1,4 +1,4 @@
-package com.homer.concurrent;
+package com.homer.concurrent.blockqueue;
 
 import java.io.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -20,26 +20,28 @@ public class BlockingQueueTest {
 
             if(!file.isDirectory()) {
                 blockingQueue.put(file);
-                System.out.println(Thread.currentThread() + ": put-->" + file.getPath() + "-->" + blockingQueue.size());
+                //System.out.println(Thread.currentThread() + ": put-->" + file.getPath() + "-->" + blockingQueue.size());
             } else {
-                System.out.println(Thread.currentThread() + ": 进入目录：" + file.getPath());
+                //System.out.println(Thread.currentThread() + ": 进入目录：" + file.getPath());
                 loadDir(file);
             }
         }
     }
 
     //搜索
-    private static void search(String keyWord, File file) throws IOException {
-        System.out.println(Thread.currentThread() + ": search: " + file.getPath());
+    private static synchronized void search(String keyWord, File file) throws IOException {
+        //System.out.println(Thread.currentThread() + ": search: " + file.getPath());
         InputStreamReader is = new FileReader(file);
         BufferedReader br = new BufferedReader(is);
         String line;
         int row = 1;
         while ((line = br.readLine()) != null) {
             if(line.contains(keyWord)) {
-                System.out.println( "****关键字[" + keyWord + "]出现在文件[" + file.getPath() + "]的"
-                        + row + "行" + new LineFinder().getPositions(line, keyWord) + "列 \n"
-                        + line.replace(keyWord,"*"+keyWord+"*"));
+//                System.out.println( "****关键字[" + keyWord + "]出现在文件[" + file.getPath() + "]的"
+//                        + row + "行" + new LineFinder().getPositions(line, keyWord) + "列 \n"
+//                        + line.replace(keyWord,"*"+keyWord+"*"));
+                System.out.printf( "****关键字[%s]出现在文件[%s]的%d行%s列\n",keyWord,file.getPath(),row, new LineFinder().getPositions(line, keyWord));
+                System.out.printf("原文：%s\n", line.replace(keyWord,"*"+keyWord+"*"));
             }
             row++;
         }
@@ -70,7 +72,7 @@ public class BlockingQueueTest {
                     boolean done = false;
                     while (!done) {
                         File file = blockingQueue.take();
-                        System.out.println(Thread.currentThread() + ": take: " + file.getPath() + "-->" + blockingQueue.size());
+                        //System.out.println(Thread.currentThread() + ": take: " + file.getPath() + "-->" + blockingQueue.size());
                         if(file == DUMMY) {
                             // 如果取到DUMMY说明队列已经没有数据进来了，循环结束。
                             // 还要重新放入DUMMY的目的是为了然其他线程也知道结束了，否则只能结束本线程，其他线程永远得不到通知
